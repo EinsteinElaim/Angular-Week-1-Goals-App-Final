@@ -1,0 +1,12 @@
+<p>goal-detail works!</p>
+<p>
+    {{goal.description}}
+</p>
+
+<!-- CUSTOM PIPE -- Let us add our dateCount custom pipe to our goal details to see it in action. -->
+<p>This goal will be complete in {{goal.completeDate|dateCount}} days.</p>
+
+<!-- When we want a child component to communicate with a parent component, we make the child component emit an event that is taken up by the parent component. -->
+<!-- Let us make our child component GoalDetailComponent, communicate with its parent component, the GoalComponent.  -->
+<!-- We'll do this by adding a button to the GoalDetailComponent that deletes a goal once we ascertain that we have completed it. -->
+<button (click)='goalDelete(true)' class="btn btn-danger">Delete Goal</button>

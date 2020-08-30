@@ -1,0 +1,46 @@
+<div class="container">
+    <p>goal component works!</p>
+    <h1>My Goals</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <div *ngFor='let goal of goalss; let i = index'> <!-- we have added a loop logic,let i = index to register the index of each goal item in the goals list. Therefor, not needing goal.id-->
+            
+                <div>
+                    <p>Goals array from the Goal class blueprint in goal component:</p>
+                    <!-- DIRECTIVE -- Let's add our strike-through directive to our host element to see the changes it creates. -->
+                    <!-- We have added the completion date to our template beside the goal name. -->
+                    <!-- This date does not look user-friendly, it looks complicated. -->
+                    <!-- PIPE -- Let's use the inbuilt date pipe in Angular to convert it to a readable format.  -->
+                    <!-- CHAINING PIPES -- We can also chain pipes to extend the transformation of the input that we give to a pipe.  -->
+                    <!-- We have added/chained the uppercase pipe to our completion date, which converts the completion date to capital characters. -->
+                    <!-- We have then displayed the goal name and below it created a button that also contains some logic -->
+                    <h4 id={{i}} appStrikethrough>{{goal.name}} due on {{goal.completeDate|date|uppercase}}</h4>
+                    <button (click)='toggleDetails(i)' class="btn btn-primary">Toggle Details</button>
+                </div>
+                
+                <div *ngIf='goal.showDescription'>
+                    <!-- The event being emitted is isComplete. We catch this event in the parent component using parenthesis()and then define that when it is emitted, the completeGoal($event,i) function should be called. -->
+                    <!-- Inside the function, we have used the special variable, $event as a placeholder for the values that we expect to be emitted by the event -->
+                    <!-- We have also passed in the index i of the goal item in the function.  -->
+                    <app-goal-detail [goal]='goal' (isComplete)='deleteGoal($event, i)'></app-goal-detail>
+                </div>
+            
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <!-- Since the addGoal event is being emitted to a parent component, we need to make sure the parent component is informed of this event being emitted. -->
+            <!-- We want the goal component to be the parent component in this case -->
+            <!-- In the template, we catch the addGoal event being emitted and define that it should call the addNewGoal() function which takes in an event placeholder. -->
+            <!-- Let's now define this function that is supposed to be executed by our parent component. -->
+            <app-goal-form (addGoal)="addNewGoal($event)"></app-goal-form>
+        </div>
+    </div>
+        
+    <!-- NgIf Directive -->
+    <!-- Here, we check if the length of the goals array is greater than five, and when it is, we display the text in the paragraph tag. -->
+    <p *ngIf='goalss.length > 5'>Your goals are too many.</p>
+    
+</div>
+

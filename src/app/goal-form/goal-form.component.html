@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <p>goal-form works!</p>
+    <h2 class="text-center">Create a new Goal:</h2>
+    <hr>
+
+    <!-- We have added a template reference variable goalForm to our form tag and equated it to ngForm. -->
+    <!-- This will provide the form element with additional features and monitor the changes and validity of input elements. -->
+    <!-- To make our submit button work as it should, we need to add/use the ngSubmit directive from angular forms module that we imported earlier. -->
+    <form (ngSubmit)='submitGoal()' #goalForm='ngForm'>
+        <div class="form-group">
+
+            <label for="name">Name</label>
+            <!-- We have then added the [(ngModel)] attribute to our name input and equated it to the name attribute of the newGoal object we created in our component definition class. -->
+            <!-- We have then defined a name attribute which is a requirement when using [(ngModel)] and a form. -->
+            <!--  The Display {{newGoal.name}} line will temporarily display the data being received.  -->
+            <input type="text" class="form-control" id="name" [(ngModel)]="newGoal.name" name="name" #name='ngModel' required>
+
+            <!-- Testing to see if we get any data -->
+            Display: {{newGoal.name}}
+
+            <!-- We have added a template reference variable #name  to access Angular's form control on this input from the template. -->
+            <!-- We have then created a div that has an attribute [hidden] which makes sure the alert is shown only when the name input is invalid.  -->
+            <!-- The pristine property allows us to hide the alert when we load a blank page. -->
+            <!-- Applied to all our form inputs -->
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                <p>Name is required!</p>
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="4" [(ngModel)]="newGoal.description" name="description" #description='ngModel' required></textarea>
+
+            <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+                <p>Description is required!</p>                
+            </div>
+
+        </div>
+        <div class="form-group">
+            
+            <label for="complete">Completion</label>
+            <input type="date" id="complete" [(ngModel)]="newGoal.completeDate" name="completeDate" #completeDate="ngModel" required>
+
+            <div [hidden]="completeDate.valid || completeDate.pristine" class="alert alert-danger">
+                <p>Completion date is required!</p>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Goal</button>
+
+    </form>
+</div>
+
