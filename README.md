@@ -4,6 +4,11 @@ This is a Goals Recorder App built in Angular. It allows a user to add & manage 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
+## Live Link
+<li>
+    <a href="https://einsteinelaim.github.io/Angular-Week-1-Goals-App-Final/">https://einsteinelaim.github.io/Angular-Week-1-Goals-App-Final/</a>
+</li>
+
 ## Technologies Used
 
 This project was created using :
